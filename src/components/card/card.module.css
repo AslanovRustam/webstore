@@ -1,0 +1,79 @@
+.cardContainer {
+  width: 352px;
+  padding: 32px;
+  margin: 16px;
+  border-radius: 24px;
+  background-color: #ffffff;
+}
+.category {
+  margin-bottom: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000000;
+  opacity: 0.5;
+}
+.name {
+  margin-bottom: 40px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+.currency {
+  margin-right: 4px;
+  margin-top: 13px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 35px;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+.price {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 72px;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+.itemBtn {
+  width: 64px;
+  height: 56px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  border-radius: 16px;
+  background-color: transparent;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  color: #4bcfa0;
+  cursor: pointer;
+}
+.itemBtn:hover,
+.itemBtn:focus {
+  background-color: #4bcfa0;
+  color: #ffffff;
+}
+.priceContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.priceBox {
+  display: flex;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .cardContainer {
+    width: 300px;
+  }
+}

@@ -1,0 +1,42 @@
+.cardListContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 88px;
+  margin-bottom: 115px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 320px;
+}
+.cardLists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.listBtn {
+  width: 235px;
+  height: 60px;
+  margin-top: 53px;
+  border-radius: 16px;
+  border: none;
+  background: #ffffff;
+  color: #50daa8;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+}
+.listBtn:hover,
+.listBtn:focus {
+  background: #50daa8;
+  color: #ffffff;
+}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+}
+@media screen and (min-width: 1280px) {
+  .cardListContainer {
+    width: 1200px;
+  }
+}
