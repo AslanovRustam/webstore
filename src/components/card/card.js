@@ -31,24 +31,3 @@ export default function Card({ item }) {
     </>
   );
 }
-
-{
-  /* <div className={s.cardContainer}>
-        <span className={s.category}>{item.category}</span>
-        <h1 className={s.name}>{item.name}</h1>
-        <div className={s.priceContainer}>
-          <div className={s.priceBox}>
-            <p className={s.currency}>$</p>
-            <span className={s.price}>{item.price}</span>
-          </div>
-          <button
-            className={s.itemBtn}
-            type="button"
-            onClick={(e) => toggleModal()}
-          >
-            BUY
-          </button>
-        </div>
-      </div>
-      {showModal && <Modal onClose={toggleModal} item={item} />} */
-}

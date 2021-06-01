@@ -106,16 +106,27 @@
   border: 1px solid #4bcfa0;
   outline: none;
 }
+.formError {
+  margin-top: -15px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  color: #e43f3f;
+}
 
 .formBtn {
+  display: flex;
+  align-items: center;
   width: 288px;
   height: 56px;
   padding: 16px 103px;
   margin-top: 16px;
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: transparent;
-  color: #4bcfa0;
+  background-color: #4bcfa0;
+  color: #ffffff;
   cursor: pointer;
   font-style: normal;
   font-weight: 500;
@@ -124,10 +135,8 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-.formBtn:hover,
-.formBtn:focus {
-  background-color: #4bcfa0;
-  color: #ffffff;
+.btnArrow {
+  margin-left: 8px;
 }
 .cardContainer {
   display: flex;

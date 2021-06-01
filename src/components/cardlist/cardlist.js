@@ -23,6 +23,31 @@ export default function CardList() {
     setShowmodal(!showModal);
   };
 
+  let newItems = items.map(
+    (item) => item.name[0].toUpperCase() + item.name.slice(1)
+    // (item) => {
+    //   const newItemName = item.name[0].toUpperCase() + item.name.slice(1);
+    //   item.name = newItemName;
+    //   {...item,newItemName }
+    // }
+    //////////////////////
+    // (item) => {
+    //   let newItem = Object.entries(item);
+    //   console.log(newItem);
+    // }
+  );
+  console.log(newItems);
+  // const ItemsToUC = (items) => {
+  //   let newItems = [];
+  //   for (let i = 0; i < items.length; i++) {
+  //     items[i] = items.name[0].toUpperCase() + items.name.slice(1);
+  //     newItems.push(items[i]);
+  //   }
+  //   return newItems;
+  // };
+  // let newItems = ItemsToUC(items);
+  // console.log(newItems);
+
   const Chiepest = (items) => {
     let min = items[0];
     for (let i = 0; i < items.length; i++) {

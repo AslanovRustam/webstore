@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import s from "./modal.module.css";
 import { ReactComponent as CloseSVG } from "../../images/x.svg";
+import { ReactComponent as Arrow } from "../../images/arrow-right.svg";
 
 const modalRoot = document.querySelector("#modal-root");
 
 export default function Modal({ onClose, item }) {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const [nameDirty, setNameDirty] = useState(false);
+  const [numberDirty, setNumberDirty] = useState(false);
+  const [nameError, setNameError] = useState("This field in required");
+  const [numberError, setNumberError] = useState("This field in required");
+  const [formValid, setFormValid] = useState(false);
+
+  useEffect(() => {
+    if (nameError || numberError) {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [nameError, numberError]);
 
   const handleBackdropClick = (event) => {
     if (event.currentTarget === event.target) {
@@ -17,10 +31,26 @@ export default function Modal({ onClose, item }) {
 
   const handleChangeName = (e) => {
     setName(e.currentTarget.value);
+    let onlyLetters = /^[a-zA-Z]*$/.test(e.currentTarget.value);
+    if (!onlyLetters) {
+      setNameError("Only letters allowed");
+    } else if (!e.currentTarget.value.length) {
+      setNameError("This field in required");
+    } else {
+      setNameError("");
+    }
   };
 
   const handleChangeNumber = (e) => {
     setNumber(e.currentTarget.value);
+    let onlyNumbers = /^[0-9]+$/.test(e.currentTarget.value);
+    if (!onlyNumbers) {
+      setNumberError("Only numbers allowed");
+    } else if (e.currentTarget.value.length < 12) {
+      setNumberError("Should contain 12 characters");
+    } else {
+      setNumberError("");
+    }
   };
 
   const handleSubmit = (e) => {
@@ -30,6 +60,16 @@ export default function Modal({ onClose, item }) {
   const buyItem = (e) => {
     console.log(`name: ${name}, number: ${number}`);
     onClose();
+  };
+  const blurHandler = (e) => {
+    switch (e.target.name) {
+      case "name":
+        setNameDirty(true);
+        break;
+      case "number":
+        setNumberDirty(true);
+        break;
+    }
   };
 
   return createPortal(
@@ -54,27 +94,51 @@ export default function Modal({ onClose, item }) {
               id="name"
               placeholder="Name"
               name="name"
-              autoFocus
+              //   autoFocus
               value={name}
               required
+              onBlur={(e) => blurHandler(e)}
               onChange={handleChangeName}
             />
+            {nameDirty && nameError && (
+              <div className={s.formError}>{nameError}</div>
+            )}
           </label>
           <label>
             <input
               className={s.formInput}
-              type="number"
+              type="text"
               required
               id="number"
               placeholder="Number"
               name="number"
               value={number}
+              onBlur={(e) => blurHandler(e)}
               onChange={handleChangeNumber}
             />
+            {numberDirty && numberError && (
+              <div className={s.formError}>{numberError}</div>
+            )}
           </label>
-          <button className={s.formBtn} type="submit" onClick={() => buyItem()}>
-            Order
-          </button>
+          {formValid ? (
+            <button
+              className={s.formBtn}
+              type="submit"
+              onClick={() => buyItem()}
+            >
+              Order
+            </button>
+          ) : (
+            <button
+              style={{ cursor: "not-allowed" }}
+              disabled
+              className={s.formBtn}
+              type="submit"
+              onClick={() => buyItem()}
+            >
+              Order <Arrow className={s.btnArrow} />
+            </button>
+          )}
         </form>
       </div>
     </div>,
