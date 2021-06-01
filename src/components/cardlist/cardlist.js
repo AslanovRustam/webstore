@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { FetchItems } from "../../services/itemsAPI";
 import s from "./cardlist.module.css";
+import Modal from "../modal/modal";
 
 import Card from "../card/card";
 
 export default function CardList() {
   const [items, setItems] = useState([]);
+  const [showModal, setShowmodal] = useState(false);
 
   useEffect(() => {
     FetchItems()
@@ -17,22 +19,44 @@ export default function CardList() {
       });
   }, []);
 
+  const toggleModal = () => {
+    setShowmodal(!showModal);
+  };
+
+  const Chiepest = (items) => {
+    let min = items[0];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].price < items[0].price) {
+        min = items[i];
+      }
+    }
+    return min;
+  };
+  const min = Chiepest(items);
+
   return (
-    <div className={s.cardListContainer}>
-      <ul className={s.cardLists}>
-        {items.map((item) => (
-          <li key={item.name}>
-            <Card
-              name={item.name}
-              category={item.category}
-              price={item.price}
-            />
-          </li>
-        ))}
-      </ul>
-      <button className={s.listBtn} type="button">
-        Buy cheapest
-      </button>
-    </div>
+    <>
+      <div className={s.cardListContainer}>
+        <ul className={s.cardLists}>
+          {items.map((item) => (
+            <li key={item.name}>
+              <Card
+                item={item}
+                toggleModal={toggleModal}
+                showModal={showModal}
+              />
+            </li>
+          ))}
+        </ul>
+        <button
+          className={s.listBtn}
+          type="button"
+          onClick={(e) => toggleModal()}
+        >
+          Buy cheapest
+        </button>
+      </div>
+      {showModal && <Modal onClose={toggleModal} item={min} />}
+    </>
   );
 }
