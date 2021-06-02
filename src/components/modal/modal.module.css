@@ -33,7 +33,6 @@
   position: absolute;
   top: -2%;
   left: 93%;
-  /* transform: translate(-50%, -50%); */
   width: 40px;
   height: 40px;
   background: #f2f2f2;
@@ -143,6 +142,7 @@
 .formBtn {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 288px;
   height: 56px;
   padding: 16px 103px;
@@ -174,16 +174,12 @@
 }
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .formContainer {
-    width: 320px;
+    width: 280px;
   }
   .formInput {
-    width: 250px;
+    width: 220px;
   }
   .formBtn {
-    width: 250px;
+    width: 260px;
   }
-  /* .errorIconContainer,
-  .errorIconNumberContainer {
-    left: 82%;
-  } */
 }

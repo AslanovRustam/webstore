@@ -34,7 +34,7 @@ export default function Modal({ onClose, item }) {
 
   const handleChangeName = (e) => {
     setName(e.currentTarget.value);
-    let onlyLetters = /^[a-zA-Z]*$/.test(e.currentTarget.value);
+    let onlyLetters = /^[a-zA-Zа-яА-Я]*$/.test(e.currentTarget.value);
     if (!onlyLetters) {
       setNameError("Only letters allowed");
     } else if (!e.currentTarget.value.length) {
@@ -49,7 +49,10 @@ export default function Modal({ onClose, item }) {
     let onlyNumbers = /^[0-9]+$/.test(e.currentTarget.value);
     if (!onlyNumbers) {
       setNumberError("Only numbers allowed");
-    } else if (e.currentTarget.value.length < 12) {
+    } else if (
+      e.currentTarget.value.length < 12 ||
+      e.currentTarget.value.length > 12
+    ) {
       setNumberError("Should contain 12 characters");
     } else {
       setNumberError("");
