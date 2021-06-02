@@ -81,6 +81,8 @@ export default function Modal({ onClose, item }) {
       case "number":
         setNumberDirty(true);
         break;
+      default:
+        break;
     }
   };
   let classNamesName = cx("formInput:hover", "formInput:focus", "formInput", {
@@ -92,7 +94,7 @@ export default function Modal({ onClose, item }) {
 
   return createPortal(
     <div className={s.Modal__backdrop} onClick={handleBackdropClick}>
-      <div className={s.formtStyle}>
+      <div className={s.formContainer}>
         <div className={s.closeIconContainer} onClick={onClose}>
           <CloseSVG className={s.closeIcon} />
         </div>
@@ -104,7 +106,7 @@ export default function Modal({ onClose, item }) {
             <span className={s.price}>{item.price}</span>
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form className={s.formBox} onSubmit={handleSubmit}>
           <label>
             <input
               className={classNamesName}
