@@ -49,10 +49,9 @@ export default function Modal({ onClose, item }) {
     let onlyNumbers = /^[0-9]+$/.test(e.currentTarget.value);
     if (!onlyNumbers) {
       setNumberError("Only numbers allowed");
-    } else if (
-      e.currentTarget.value.length < 12 ||
-      e.currentTarget.value.length > 12
-    ) {
+    } else if (!e.currentTarget.value) {
+      setNumberError("This field in required");
+    } else if (e.currentTarget.value.length !== 12) {
       setNumberError("Should contain 12 characters");
     } else {
       setNumberError("");
@@ -88,11 +87,38 @@ export default function Modal({ onClose, item }) {
         break;
     }
   };
+  const focusHandler = () => {
+    let onlyLetters = /^[a-zA-Zа-яА-Я]*$/.test(name);
+    if (!onlyLetters) {
+      setNameError("Only letters allowed");
+      setNameDirty(true);
+    } else if (!name.length) {
+      setNameError("This field in required");
+      setNameDirty(true);
+    } else {
+      setNameError("");
+    }
+
+    let onlyNumbers = /^[0-9]+$/.test(number);
+    if (!number.length) {
+      setNumberError("This field in required");
+      setNumberDirty(true);
+    } else if (number.length !== 12) {
+      setNumberError("Should contain 12 characters");
+      setNumberDirty(true);
+    } else if (!onlyNumbers) {
+      setNumberError("Only numbers allowed");
+      setNumberDirty(true);
+    } else {
+      setNumberError("");
+    }
+  };
+
   let classNamesName = cx("formInput:hover", "formInput:focus", "formInput", {
-    formInputError: nameError,
+    formInputError: nameDirty && nameError,
   });
   let classNamesNumber = cx("formInput:hover", "formInput:focus", "formInput", {
-    formInputError: numberError,
+    formInputError: numberDirty && numberError,
   });
 
   return createPortal(
@@ -156,7 +182,7 @@ export default function Modal({ onClose, item }) {
             className={s.formBtn}
             type="submit"
             onClick={(e) => {
-              formValid ? buyItem() : blurHandler(e);
+              formValid ? buyItem() : focusHandler();
             }}
           >
             Order <Arrow className={s.btnArrow} />
